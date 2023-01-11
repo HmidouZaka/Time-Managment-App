@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style  name="splashScreenTheme" parent="Theme.SplashScreen">
+        <item name="postSplashScreenTheme">@style/Theme.TimeManagment</item>
+        <item name="windowSplashScreenBackground">@color/white</item>
+        <item name="windowSplashScreenAnimatedIcon">@drawable/logo_image</item>
+        <item name="windowSplashScreenIconBackgroundColor">@color/white</item>
+    </style>
+</resources>
