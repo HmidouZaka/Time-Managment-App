@@ -8,7 +8,7 @@ this is a simple android application build bz Kotlin the app help you to manage 
 </br>
 
 <div style="text-align:center; width="100%" ">
-  <div width="100">
+  <div style="padding:50">
       
   </div>
 <img src="https://user-images.githubusercontent.com/94437384/212470983-308acff4-6b03-4498-b599-5c21adb4bdd7.jpg" width="200" >
