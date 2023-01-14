@@ -26,4 +26,3 @@ this is a simple android application build bz Kotlin the app help you to manage 
 <div style="text-align:center; width="100%" ">
   <img src="https://user-images.githubusercontent.com/94437384/212471782-ebfa3b41-1eec-4fd3-b3d4-118791b61b72.jpg" width="200" >
 </div>
-![Screenshot_2023-01-14-12-16-02-215_com theprojectbyzakariadeveloper timemanagment](https://user-images.githubusercontent.com/94437384/212471782-ebfa3b41-1eec-4fd3-b3d4-118791b61b72.jpg)
