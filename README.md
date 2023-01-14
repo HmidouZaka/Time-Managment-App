@@ -47,8 +47,6 @@ this is a simple android application build by Kotlin and #jetpack compose the ap
 
 </br>
 </br>
+
 https://user-images.githubusercontent.com/94437384/212472203-e6c97c13-231b-4e92-8e69-9e3bd165dce2.mp4
 
-<video width="320" height="240">
-  <source src="https://user-images.githubusercontent.com/94437384/212472203-e6c97c13-231b-4e92-8e69-9e3bd165dce2.mp4" type="video/mp4">
-</video>
