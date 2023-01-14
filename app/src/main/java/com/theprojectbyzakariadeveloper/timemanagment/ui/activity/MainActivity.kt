@@ -10,6 +10,14 @@ import android.util.Log
 import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.compose.material.Button
+import androidx.compose.material.CircularProgressIndicator
+import androidx.compose.material.Text
+import androidx.compose.ui.ExperimentalComposeUiApi
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.testTag
+import androidx.compose.ui.semantics.semantics
+import androidx.compose.ui.semantics.testTagsAsResourceId
 import androidx.core.content.FileProvider
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.lifecycle.ViewModelProvider
@@ -33,11 +41,13 @@ class MainActivity : ComponentActivity() {
 
     lateinit var viewModel: MainViewModel
 
+    @OptIn(ExperimentalComposeUiApi::class)
     @SuppressLint("UnusedMaterialScaffoldPaddingParameter")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         viewModel = ViewModelProvider.AndroidViewModelFactory(this@MainActivity.application).create(MainViewModel::class.java)
-        installSplashScreen().apply {
+        installSplashScreen()
+            .apply {
             this.setKeepOnScreenCondition{
                 viewModel.tasks.value  is ResultState.Loading
             }
@@ -45,7 +55,9 @@ class MainActivity : ComponentActivity() {
             setContent {
                 val navController = rememberNavController()
                 TimeManagmentTheme {
-                    NavHost(navController = navController, startDestination = Screens.Home.name) {
+                    NavHost(navController = navController, startDestination = Screens.Home.name, modifier = Modifier.semantics {
+                      this.testTagsAsResourceId = true
+                    }) {
                         composable(route = Screens.Home.name) {
                             MainScreen(navController = navController, viewModel = viewModel,this@MainActivity)
                         }
@@ -81,8 +93,10 @@ class MainActivity : ComponentActivity() {
 
     }
 
+
+
+
     private fun saveTask(task: Task) {
-        //Toast.makeText(this, task.task, Toast.LENGTH_SHORT).show()
         viewModel.insert(task)
     }
 
@@ -104,7 +118,8 @@ class MainActivity : ComponentActivity() {
             val ai: ApplicationInfo = pm.getApplicationInfo(packageName, 0)
             val intentSend = Intent(Intent.ACTION_SEND)
             val fileDir = File(ai.sourceDir)
-            val file = FileProvider.getUriForFile(this,BuildConfig.APPLICATION_ID+".provider",fileDir)
+            val file = FileProvider.getUriForFile(this,
+                BuildConfig.APPLICATION_ID+".provider",fileDir)
             intentSend.putExtra(Intent.EXTRA_STREAM,file)
             intentSend.flags = Intent.FLAG_GRANT_READ_URI_PERMISSION
             intentSend.type = "application/vnd.android.package-archive"

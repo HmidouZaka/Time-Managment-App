@@ -25,6 +25,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.TextStyle
@@ -56,6 +57,7 @@ fun TaskCard(note: Task, viewModel: MainViewModel, edit: (Task) -> Unit) {
 
     Card(
         modifier = Modifier
+            .testTag("task 1")
             .padding(horizontal = 10.dp)
             .fillMaxWidth()
             .animateContentSize(),
@@ -63,7 +65,12 @@ fun TaskCard(note: Task, viewModel: MainViewModel, edit: (Task) -> Unit) {
         shape = CutCornerShape(10.dp),
         backgroundColor = ifColorOfTask,
         onClick = {
-            isShowMore.value = !isShowMore.value
+            note.task.let {
+                if (it.length >= 100){
+                    isShowMore.value = !isShowMore.value
+                }
+            }
+
         }
     ) {
         Row(
@@ -72,7 +79,13 @@ fun TaskCard(note: Task, viewModel: MainViewModel, edit: (Task) -> Unit) {
                 .padding(vertical = 2.dp, horizontal = 8.dp)
         ) {
             if (note.category.isNotEmpty()) {
-                Text(text = note.category, modifier = Modifier.weight(1f))
+                Text(
+                    text = note.category,
+                    modifier = Modifier
+                        .padding(bottom = 8.dp)
+                        .weight(1f),
+                    color = MaterialTheme.colors.primary
+                )
             } else {
                 Spacer(modifier = Modifier.weight(1f))
             }
@@ -80,10 +93,12 @@ fun TaskCard(note: Task, viewModel: MainViewModel, edit: (Task) -> Unit) {
                 imageVector = Icons.Default.Menu,
                 contentDescription = "more",
                 modifier = Modifier
+                    .testTag("click for more")
                     .size(20.dp)
                     .clickable {
                         isEditOrDeleteVisible.value = !isEditOrDeleteVisible.value
                     }
+
             )
         }
 
@@ -108,11 +123,13 @@ fun TaskCard(note: Task, viewModel: MainViewModel, edit: (Task) -> Unit) {
 
 @Composable
 fun CardActions(task: Task, delete: (Task) -> Unit, edit: (Task) -> Unit) {
-    Row(Modifier.fillMaxSize(), verticalAlignment = Alignment.CenterVertically) {
+    Row(Modifier.padding(15.dp).fillMaxSize(), verticalAlignment = Alignment.CenterVertically) {
         Image(
             painter = painterResource(id = R.drawable.confused),
             contentDescription = "Chose",
             modifier = Modifier
+                .testTag("card")
+                .requiredSize(80.dp)
                 .padding(horizontal = 5.dp, vertical = 3.dp)
                 .fillMaxHeight()
                 .weight(1f),
@@ -238,6 +255,5 @@ fun CardContent(task: Task, isShowMore: () -> Boolean) {
 
             }
         }
-
     }
 }

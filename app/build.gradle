@@ -29,6 +29,11 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
         benchmark {
+
+                initWith buildTypes.release
+
+            proguardFiles 'benchmark-rules.pro'
+
             signingConfig signingConfigs.debug
             matchingFallbacks = ['release']
             debuggable false
@@ -84,6 +89,7 @@ dependencies {
     implementation "com.maxkeppeler.sheets-compose-dialogs:clock:1.0.2"
 
     implementation "com.maxkeppeler.sheets-compose-dialogs:calendar:1.0.2"
-
+    implementation("androidx.profileinstaller:profileinstaller:1.2.2")
     debugImplementation 'com.squareup.leakcanary:leakcanary-android:2.8.1'
+
 }

@@ -13,7 +13,6 @@ import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Scaffold
 import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.ArrowDropDown
 import androidx.compose.material.icons.filled.Delete
 import androidx.compose.material.icons.filled.KeyboardArrowDown
 import androidx.compose.material.icons.filled.KeyboardArrowUp
@@ -24,6 +23,7 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalConfiguration
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -71,6 +71,7 @@ fun RowSetting(
     val showMore = rememberSaveable {
         mutableStateOf(false)
     }
+    val list = viewModel.categories.observeAsState(emptyList())
     Column(
         Modifier
             .animateContentSize(tween(500))
@@ -78,12 +79,15 @@ fun RowSetting(
     ) {
         Row(
             modifier = Modifier
-                .fillMaxWidth()
+                .fillMaxWidth().testTag("all category row")
                 .background(MaterialTheme.colors.background)
                 .clickable {
-                    showMore.value = !showMore.value
+                    if (list.value.isNotEmpty()){
+                        showMore.value = !showMore.value
+                    }
                 }
-                .padding(horizontal = 15.dp, vertical = 25.dp), verticalAlignment = Alignment.CenterVertically
+                .padding(horizontal = 15.dp, vertical = 25.dp),
+            verticalAlignment = Alignment.CenterVertically
         ) {
             Text(
                 text = "All Category",
@@ -97,21 +101,21 @@ fun RowSetting(
                 tint = MaterialTheme.colors.onBackground
             )
         }
-        if (showMore.value)
-            ListOfCategory(viewModel)
+        if (showMore.value) {
+            ListOfCategory({ list.value }, viewModel)
+        }
     }
 }
 
 @Composable
-fun ListOfCategory(viewModel: MainViewModel) {
-    val list = viewModel.categories.observeAsState(emptyList())
+fun ListOfCategory(list: () -> List<Category>, viewModel: MainViewModel) {
     val count = LocalConfiguration.current.orientation + 1
     LazyVerticalGrid(
         columns = GridCells.Fixed(count),
         modifier = Modifier.fillMaxWidth()
     ) {
-        items(list.value) { categoryItem ->
-            CardCategory(category = categoryItem){
+        items(list()) { categoryItem ->
+            CardCategory(category = categoryItem) {
                 viewModel.delete(it)
             }
         }
@@ -121,7 +125,7 @@ fun ListOfCategory(viewModel: MainViewModel) {
 @Composable
 fun CardCategory(
     category: Category,
-    deleteCategory:(Category)->Unit
+    deleteCategory: (Category) -> Unit
 ) {
     Row(
         modifier = Modifier
@@ -130,15 +134,29 @@ fun CardCategory(
             .background(MaterialTheme.colors.onPrimary, CircleShape),
         verticalAlignment = Alignment.CenterVertically
     ) {
-        Text(text = category.id.toString(), modifier = Modifier.padding(8.dp), fontFamily = FontFamily.Serif, fontSize = 18.sp)
-        Text(text = category.name, modifier = Modifier.weight(1f), fontFamily = MaterialTheme.typography.h1.fontFamily, fontSize = 16.sp)
+        Text(
+            text = category.id.toString(),
+            modifier = Modifier.padding(8.dp),
+            fontFamily = FontFamily.Serif,
+            fontSize = 18.sp,
+            maxLines = 1
+        )
+        Text(
+            text = category.name,
+            modifier = Modifier.weight(1f),
+            fontFamily = MaterialTheme.typography.h1.fontFamily,
+            fontSize = 16.sp,
+            maxLines = 1
+        )
         Icon(
             imageVector = Icons.Default.Delete,
             contentDescription = "show more",
             tint = MaterialTheme.colors.secondary,
-            modifier = Modifier.clickable {
-                deleteCategory(category)
-            }.padding(8.dp)
+            modifier = Modifier
+                .clickable {
+                    deleteCategory(category)
+                }
+                .padding(8.dp)
         )
     }
 }

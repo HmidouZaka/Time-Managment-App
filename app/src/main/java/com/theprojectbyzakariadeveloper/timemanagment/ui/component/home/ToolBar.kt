@@ -23,6 +23,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
@@ -130,7 +131,7 @@ fun SearchComponent(onSearch: (String) -> Unit, hide: () -> Unit) {
                 Icon(
                     imageVector = Icons.Default.Close,
                     contentDescription = "search",
-                    modifier = Modifier.clickable { hide() })
+                    modifier = Modifier.testTag("click_hide").clickable { hide() })
             },
             maxLines = 1,
             singleLine = true
@@ -168,14 +169,14 @@ fun ToolBarComponent(
         )
 
         IconButton(
-            onClick = onClickSearch
+            onClick = onClickSearch, modifier = Modifier.testTag("click_search")
         ) {
-            Icon(imageVector = Icons.Default.Search, contentDescription = "search")
+            Icon(imageVector = Icons.Default.Search, contentDescription = "search icon click me")
         }
         IconButton(
             onClick = {
                 menuIsShow = true
-            }
+            }, modifier = Modifier.testTag("click menu")
         ) {
             Icon(painter = painterResource(id = R.drawable.ic_more), contentDescription = "search")
         }
@@ -188,10 +189,11 @@ fun ToolBarComponent(
                     menuIsShow = false
                 }
             ) {
-                DropdownMenuItem(onClick = {
+                DropdownMenuItem(
+                    onClick = {
                     ocClickItemMenu(OptionsMenu.SendApp)
                     menuIsShow = false
-                }) {
+                }, modifier = Modifier.testTag("click item send app")) {
                     Icon(
                         imageVector = Icons.Default.Send,
                         contentDescription = "send",
@@ -203,7 +205,7 @@ fun ToolBarComponent(
                 DropdownMenuItem(onClick = {
                     ocClickItemMenu(OptionsMenu.Setting)
                     menuIsShow = false
-                }) {
+                },Modifier.testTag("click item to stetting")) {
                     Icon(
                         imageVector = Icons.Default.Settings,
                         contentDescription = "send",

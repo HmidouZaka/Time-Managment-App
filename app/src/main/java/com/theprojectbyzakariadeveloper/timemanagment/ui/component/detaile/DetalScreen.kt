@@ -1,5 +1,3 @@
-
-
 package com.theprojectbyzakariadeveloper.timemanagment.ui.component.detaile
 
 import android.annotation.SuppressLint
@@ -24,6 +22,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
@@ -71,7 +70,7 @@ fun DetailScreen(
             .background(MaterialTheme.colors.background),
         topBar = {
             val title = if (taskEdit.isNull()) "Add Task" else "Edit Task"
-            ToopBarBack(navController, Modifier,title)
+            ToopBarBack(navController, Modifier, title)
         }
     )
     {
@@ -91,42 +90,42 @@ fun DetailScreen(
         ) {
             SpaceComponent()
             Header("What is to be Done ?")
-            InputEnterTask(mainActivity, Modifier,colorHelper,taskEdit)
+            InputEnterTask( Modifier, colorHelper, taskEdit)
             SpaceComponent()
             Header("Date for the Task")
-            SelectDate(colorHelper,taskEdit)
+            SelectDate(colorHelper, taskEdit)
             SpaceComponent()
             Header("Time for the Task")
-            SelectTime(Modifier,colorHelper,taskEdit)
+            SelectTime(Modifier, colorHelper, taskEdit)
             SpaceComponent()
             Header("Category for the task")
-            CategoryComponent(viewModel, Modifier, saveCategory,colorHelper,taskEdit)
+            CategoryComponent(viewModel, Modifier, saveCategory, colorHelper, taskEdit)
         }
-        SaveBtn(navController, Modifier, saveTask,taskEdit)
+        SaveBtn(navController, Modifier, saveTask, taskEdit)
 
     }
 }
 
 
 @Composable
-fun ToopBarBack(navController: NavHostController, modifier: Modifier,title: String) {
-        TopAppBar(
-            modifier = modifier
-                .fillMaxWidth(),
-            backgroundColor = MaterialTheme.colors.background, elevation = 2.dp
-        ) {
-            IconButton(onClick = {
-                navController.popBackStack()
-            }) {
-                Icon(
-                    imageVector = Icons.Default.ArrowBack,
-                    contentDescription = "back to home",
-                    tint = MaterialTheme.colors.onBackground
-                )
-            }
-            Spacer(modifier = Modifier.width(10.dp))
-            Text(text = title, color = MaterialTheme.colors.onBackground, fontSize = 20.sp)
+fun ToopBarBack(navController: NavHostController, modifier: Modifier, title: String) {
+    TopAppBar(
+        modifier = modifier
+            .fillMaxWidth(),
+        backgroundColor = MaterialTheme.colors.background, elevation = 2.dp
+    ) {
+        IconButton(onClick = {
+            navController.popBackStack()
+        }, modifier = Modifier.testTag("back to home")) {
+            Icon(
+                imageVector = Icons.Default.ArrowBack,
+                contentDescription = "back to home",
+                tint = MaterialTheme.colors.onBackground
+            )
         }
+        Spacer(modifier = Modifier.width(10.dp))
+        Text(text = title, color = MaterialTheme.colors.onBackground, fontSize = 20.sp)
+    }
 }
 
 @Composable
@@ -176,15 +175,16 @@ fun CategoryComponent(
     val isDialogShowed = rememberSaveable { mutableStateOf(false) }
     val listOfCategory = viewModel.categories.observeAsState()
     Row(modifier.fillMaxWidth(), verticalAlignment = CenterVertically) {
-        SelectCategory({},
+        SelectCategory({
+
+        },
             Modifier
                 .weight(1f)
                 .padding(start = 8.dp),
-            listOfCategory.value?.map { it.name } ?: listOf("Default")
-        ,colorHelper,taskEdit)
+            listOfCategory.value?.map { it.name } ?: listOf("Default"), colorHelper, taskEdit)
         IconButton(onClick = {
             isDialogShowed.value = true
-        }) {
+        }, modifier = Modifier.testTag("add category by dialog")) {
             Icon(
                 imageVector = Icons.Default.List,
                 contentDescription = "back to home",
@@ -198,7 +198,7 @@ fun CategoryComponent(
         }, {
             val category = Category(0, it.trimEnd().trimStart())
             saveCategory(category)
-        },colorHelper)
+        }, colorHelper)
     }
 
 }
@@ -228,7 +228,7 @@ fun SelectTime(modifier: Modifier, colorHelper: Color, taskEdit: Task?) {
         CoroutineScope(Dispatchers.Main).launch {
             timeState.show()
         }
-    }, R.drawable.timer, "Select time",colorHelper)
+    }, R.drawable.timer, "Select time", colorHelper)
 }
 
 @Composable
@@ -258,12 +258,11 @@ fun SelectDate(colorHelper: Color, taskEdit: Task?) {
         CoroutineScope(Dispatchers.Main).launch {
             dateState.show()
         }
-    }, R.drawable.today, "Select Date",colorHelper=colorHelper)
+    }, R.drawable.today, "Select Date", colorHelper = colorHelper)
 }
 
 @Composable
 fun InputEnterTask(
-    mainActivity: MainActivity,
     modifier: Modifier,
     colorHelper: Color,
     taskEdit: Task?
@@ -274,7 +273,7 @@ fun InputEnterTask(
                 task.task = it
             }, modifier = Modifier
                 .weight(1f)
-                .padding(end = 8.dp),colorHelper=colorHelper,taskEdit = taskEdit
+                .padding(end = 8.dp), colorHelper = colorHelper, taskEdit = taskEdit
         )
     }
 }
@@ -313,7 +312,7 @@ fun InputTask(
                 .animateContentSize(tween(durationMillis = 700)),
             placeholder = { Text(text = "Enter Task Hear") },
             colors = TextFieldDefaults.textFieldColors(
-                backgroundColor =colorHelper,
+                backgroundColor = colorHelper,
                 cursorColor = Color.Black,
                 textColor = MaterialTheme.colors.onBackground,
                 focusedIndicatorColor = MaterialTheme.colors.primary
@@ -332,7 +331,13 @@ fun InputTask(
 
 
 @Composable
-fun CardTime(data: () -> String, onClick: () -> Unit, icon: Int, hint: String,colorHelper:Color = MaterialTheme.colors.background) {
+fun CardTime(
+    data: () -> String,
+    onClick: () -> Unit,
+    icon: Int,
+    hint: String,
+    colorHelper: Color = MaterialTheme.colors.background
+) {
 
     Box(
         modifier = Modifier
@@ -376,9 +381,8 @@ fun SelectCategory(
     taskEdit: Task?
 ) {
     val category = rememberSaveable {
-
         val list = listOfCategory.ifEmpty { listOf("Default") }
-        val categoryName = if(taskEdit.isNull()) list[0] else taskEdit!!.category
+        val categoryName = if (taskEdit.isNull()) list[0] else taskEdit!!.category
         mutableStateOf(categoryName)
     }
     task.category = category.value
@@ -387,6 +391,7 @@ fun SelectCategory(
     }
     Box(
         modifier = modifier
+            .testTag("show categories")
             .height(65.dp)
             .clickable {
                 isShowMenu.value = true
@@ -403,7 +408,10 @@ fun SelectCategory(
                 .fillMaxSize()
                 .padding(horizontal = 8.dp), verticalAlignment = CenterVertically
         ) {
-            Text(text = category.value)
+            Text(
+                text = category.value, maxLines =
+                1
+            )
             Spacer(modifier = Modifier.weight(1f))
             Icon(
                 imageVector = Icons.Default.ArrowDropDown,
@@ -460,7 +468,11 @@ fun SpaceComponent() {
 
 
 @Composable
-fun ShowDialog(change: (Boolean) -> Unit, onClickAdd: (String) -> Unit,colorHelper:Color = MaterialTheme.colors.background) {
+fun ShowDialog(
+    change: (Boolean) -> Unit,
+    onClickAdd: (String) -> Unit,
+    colorHelper: Color = MaterialTheme.colors.background
+) {
     var categoryName = ""
     Dialog(
         onDismissRequest = { change(false) }) {

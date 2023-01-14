@@ -21,14 +21,13 @@ import java.io.File
 
 
 class MainViewModel(application: Application) : AndroidViewModel(application){
-    val applicationTask = application
     private val _result = MutableStateFlow<ResultState<List<Task>>>(ResultState.Loading())
     val tasks = _result.asStateFlow()
     private lateinit var repository: MainRepository
     init {
-        val dataBase = MyDataBase.getDatabase(this.getApplication<Application>().applicationContext)
-        repository = MainRepository(dataBase)
         viewModelScope.launch {
+            val dataBase = MyDataBase.getDatabase(this@MainViewModel.getApplication<Application>().applicationContext)
+            repository = MainRepository(dataBase)
             repository.tasks.collectLatest {
                 try {
                     _result.emit(ResultState.Success(result = it))

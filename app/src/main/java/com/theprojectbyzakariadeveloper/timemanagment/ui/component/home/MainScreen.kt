@@ -18,6 +18,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import com.theprojectbyzakariadeveloper.timemanagment.model.Task
@@ -29,22 +30,28 @@ import com.theprojectbyzakariadeveloper.timemanagment.viewmodel.MainViewModel
 
 @SuppressLint("UnusedMaterialScaffoldPaddingParameter")
 @Composable
-fun MainScreen(navController: NavHostController, viewModel: MainViewModel,mainActivity: MainActivity) {
+fun MainScreen(
+    navController: NavHostController,
+    viewModel: MainViewModel,
+    mainActivity: MainActivity
+) {
     Scaffold(
         modifier = Modifier.fillMaxSize(),
-        topBar = { ToolBar(ocClickItemMenu = {
-              when(it){
-                  OptionsMenu.Setting -> {
+        topBar = {
+            ToolBar(ocClickItemMenu = {
+                when (it) {
+                    OptionsMenu.Setting -> {
                         navController.navigate(Screens.Setting.name)
-                  }
-                  OptionsMenu.SendApp -> {
-                    mainActivity.shareApp()
-                  }
-              }
-        }, onSearch = {
-            viewModel.findTask(it)
+                    }
+                    OptionsMenu.SendApp -> {
+                        mainActivity.shareApp()
+                    }
+                }
+            }, onSearch = {
+                viewModel.findTask(it)
+            }
+            )
         }
-        ) }
     ) {
         val resultState = viewModel.tasks.collectAsState()
         when (resultState.value) {
@@ -67,6 +74,7 @@ fun MainScreen(navController: NavHostController, viewModel: MainViewModel,mainAc
                         verticalArrangement = Arrangement.spacedBy(5.dp),
                         contentPadding = PaddingValues(vertical = 10.dp),
                         modifier = Modifier
+                            .testTag("list of tasks")
                             .fillMaxSize()
                             .animateContentSize(
                                 spring(
@@ -104,7 +112,8 @@ fun MainScreen(navController: NavHostController, viewModel: MainViewModel,mainAc
                 },
                 modifier = Modifier
                     .padding(24.dp)
-                    .align(Alignment.BottomEnd),
+                    .align(Alignment.BottomEnd)
+                    .testTag("create new task btn"),
                 backgroundColor = Color(0xFF03A9F4)
             ) {
                 Icon(
