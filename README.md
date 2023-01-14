@@ -7,7 +7,7 @@ this is a simple android application build bz Kotlin the app help you to manage 
 </br>
 </br>
 
-<div style="text-align:center; display: flex; justify-content: space-between;width="100%" ">
+<div style="text-align:center; width="100%" ">
 <img src="https://user-images.githubusercontent.com/94437384/212470983-308acff4-6b03-4498-b599-5c21adb4bdd7.jpg" width="200" >
 <img src="https://user-images.githubusercontent.com/94437384/212471237-5c6ebe58-6094-47a6-a9b6-965d5fd3ad58.jpg" width="200" >
 <img src="https://user-images.githubusercontent.com/94437384/212471233-65554959-4e6b-41b6-a4d3-b33104a19e9e.jpg" width="200" >
@@ -23,5 +23,7 @@ this is a simple android application build bz Kotlin the app help you to manage 
 <img src="https://user-images.githubusercontent.com/94437384/212471261-dea28808-4f9d-44fc-bcc2-fa1641ba7e60.jpg" width="200" >
 <img src="https://user-images.githubusercontent.com/94437384/212471264-b006dae8-9860-424f-a093-23a929d5c074.jpg" width="200" >
 </div>
-
-
+<div style="text-align:center; width="100%" ">
+  <img src="https://user-images.githubusercontent.com/94437384/212471782-ebfa3b41-1eec-4fd3-b3d4-118791b61b72.jpg" width="200" >
+</div>
+![Screenshot_2023-01-14-12-16-02-215_com theprojectbyzakariadeveloper timemanagment](https://user-images.githubusercontent.com/94437384/212471782-ebfa3b41-1eec-4fd3-b3d4-118791b61b72.jpg)
