@@ -7,7 +7,7 @@ this is a simple android application build bz Kotlin the app help you to manage 
 </br>
 </br>
 
-<div style="text-align:center">
+<div style="text-align:center; display: flex; justify-content: space-between;width="100%" ">
 <img src="https://user-images.githubusercontent.com/94437384/212470983-308acff4-6b03-4498-b599-5c21adb4bdd7.jpg" width="200" >
 <img src="https://user-images.githubusercontent.com/94437384/212471237-5c6ebe58-6094-47a6-a9b6-965d5fd3ad58.jpg" width="200" >
 <img src="https://user-images.githubusercontent.com/94437384/212471233-65554959-4e6b-41b6-a4d3-b33104a19e9e.jpg" width="200" >
