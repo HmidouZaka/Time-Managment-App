@@ -41,8 +41,12 @@
           <img src="https://user-images.githubusercontent.com/94437384/212471261-dea28808-4f9d-44fc-bcc2-fa1641ba7e60.jpg" width="24%" alt="Image 2">
           <img src="https://user-images.githubusercontent.com/94437384/212471264-b006dae8-9860-424f-a093-23a929d5c074.jpg" width="24%" alt="Image 3">
         </p>
+        <h2>Simple video</h2>
+        <div align="center" width="100%"  >
+                https://user-images.githubusercontent.com/94437384/212472203-e6c97c13-231b-4e92-8e69-9e3bd165dce2.mp4
+        </div>
 </div>
 
 
-https://user-images.githubusercontent.com/94437384/212472203-e6c97c13-231b-4e92-8e69-9e3bd165dce2.mp4
+
 
