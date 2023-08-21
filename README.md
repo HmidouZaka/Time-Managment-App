@@ -1,6 +1,18 @@
-# Time-Managment-App
-this is a simple android application build by Kotlin and #jetpack compose the app help you to manage your time
 
+[![MasterHead](https://github.com/HmidouZaka/Time-Managment-App/assets/94437384/e68773dd-4ff1-4c5c-8d4f-37e323b74997)](https://rishavchanda.io)
+![Colorful Minimalist Social Media Banner](https://github.com/HmidouZaka/Time-Managment-App/assets/94437384/e68773dd-4ff1-4c5c-8d4f-37e323b74997)
+
+
+<div align="center">
+        <h1 >👋 Time Managment Android App </h1>
+</div>
+
+<div>
+    <h3>🧐 Description</h3>
+    <p>
+this is a simple Android application build by Kotlin and #jetpack compose the app help you to manage your time
+    </p>
+</div>
 
 </br>
 </br>
