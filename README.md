@@ -44,20 +44,5 @@
 </div>
 
 
-
-
-
-</br>
-
-</br>
-<div style="text-align:center; width="100%" ">
-  <img src="https://user-images.githubusercontent.com/94437384/212471782-ebfa3b41-1eec-4fd3-b3d4-118791b61b72.jpg" width="200" >
-</div>
-</br>
-</br>
-
-</br>
-</br>
-
 https://user-images.githubusercontent.com/94437384/212472203-e6c97c13-231b-4e92-8e69-9e3bd165dce2.mp4
 
