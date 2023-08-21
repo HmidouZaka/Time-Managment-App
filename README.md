@@ -1,4 +1,3 @@
-
 [![MasterHead](https://github.com/HmidouZaka/Time-Managment-App/assets/94437384/e68773dd-4ff1-4c5c-8d4f-37e323b74997)](https://rishavchanda.io)
 ![Colorful Minimalist Social Media Banner](https://github.com/HmidouZaka/Time-Managment-App/assets/94437384/e68773dd-4ff1-4c5c-8d4f-37e323b74997)
 
