@@ -46,8 +46,6 @@
                 https://user-images.githubusercontent.com/94437384/212472203-e6c97c13-231b-4e92-8e69-9e3bd165dce2.mp4
         </div>
 </div>
-
-
 <div>
         <h3>In this app, I used</h3>
         <ul>
@@ -63,10 +61,8 @@
 
 ---
 
-
-
  <h1>🛠️ Tools </h1>
-    <p>
+            <p>
                This is a simple overview of the tools I used in this project, such as Android Studio, Git, GitHub
            </p>
  <div align="center">
