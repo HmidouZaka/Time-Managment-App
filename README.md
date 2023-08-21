@@ -68,7 +68,6 @@
  <div align="center">
       <table>
                  <tr>
-                        
                            <td width="50%">
                                  <div align="center">
                                       <img src="https://avatars.githubusercontent.com/u/18133?s=200&v=4"   width="30%" alt="Image 1" >
@@ -89,7 +88,6 @@
                          </td>
                  </tr>
          </table>
-
  </div>
 
 ---
